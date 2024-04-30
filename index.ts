@@ -6,7 +6,7 @@ import { angleMerklDistributorAbi } from "./abi"
 import { createWalletClient } from 'viem'
 import { privateKeyToAccount } from 'viem/accounts'
 import { mainnet } from 'viem/chains'
-import {config} from "dotenv"
+import { config } from "dotenv"
 config()
 
 const users: string[] = [];
@@ -35,6 +35,10 @@ const client = createWalletClient({
 
 })
 
+const tokensToClaim = [
+  "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"
+].map((token) => token.toLowerCase());
+
 fs.createReadStream('list.csv')
   .pipe(csv())
   .on('data', (row) => {
@@ -44,7 +48,7 @@ fs.createReadStream('list.csv')
         const tokenData = response.data["1"].tokenData;
         let i = 0
         for (const token in tokenData) {
-          if (token === "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2") {
+          if (tokensToClaim.includes(token.toLowerCase())) {
             users.push(recipient);
             tokens.push(token);
             amounts.push(tokenData[token].accumulated);
