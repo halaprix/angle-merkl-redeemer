@@ -1,5 +1,11 @@
 # angle-merkl-redeemer
 
+To install bun (requires version 1.0.0 due to axios problems):
+
+```bash
+curl -fsSl https://bun.sh/install | bash -s "bun-v1.0.0"
+```
+
 To install dependencies:
 
 ```bash
